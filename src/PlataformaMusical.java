@@ -138,10 +138,9 @@ public class PlataformaMusical implements NivelJerarquia {
             BinaryTreeNode<NivelJerarquia> nodoSelloNuevo = buscarSelloPorNombre(nombreSello);
 
             if (nodoSelloNuevo != null) {
-                arbol.deleteNode(nodoArtista);                 //borrar del árbol
-                nodoArtista.setRight(null);                    //borrar referencias a los nodos que le seguían
-                arbol.insertNode(nodoArtista, nodoSelloNuevo); //insertar como hijo del sello
-                transferido = true;
+                arbol.deleteNode(nodoArtista);    //borrar del árbol
+                nodoArtista.setRight(null);       //borrar referencias a los nodos que le seguían
+                transferido = arbol.insertNode(nodoArtista, nodoSelloNuevo); //insertar como hijo del sello;
             }
         }
         
@@ -196,9 +195,8 @@ public class PlataformaMusical implements NivelJerarquia {
         if (nodoAlbum != null) {
             for (Cancion c: canciones) {
                 BinaryTreeNode<NivelJerarquia> nodoCancion = new BinaryTreeNode<>(c);
-                arbol.insertNode(nodoCancion, nodoAlbum);
+                agregadas = arbol.insertNode(nodoCancion, nodoAlbum);
             }
-            agregadas = true;
         }
         
         return agregadas;
