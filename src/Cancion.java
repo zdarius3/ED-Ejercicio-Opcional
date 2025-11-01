@@ -1,4 +1,4 @@
-public class Cancion {
+public class Cancion implements NivelJerarquia{
     private String titulo;
     private float duracion;
     private int numeroPista;
