@@ -1,19 +1,14 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class Album {
+public class Album implements NivelJerarquia {
     private String titulo;
     private int annoLanzamiento;
     private String generoPredominante;
     private int cantidadCanciones;
-    private ArrayList<Cancion> canciones;
 
     public Album(String titulo, int annoLanzamiento, String generoPredominante, int cantidadCanciones) {
         setTitulo(titulo);
         setAnnoLanzamiento(annoLanzamiento);
         setGeneroPredominante(generoPredominante);
         setCantidadCanciones(cantidadCanciones);
-        canciones = new ArrayList<>();
     }
 
     public String getTitulo() {
@@ -46,38 +41,5 @@ public class Album {
 
     public void setCantidadCanciones(int cantidadCanciones) {
         this.cantidadCanciones = cantidadCanciones;
-    }
-
-    public ArrayList<Cancion> getCanciones() {
-        return canciones;
-    }
-
-    public void agregarCancion(Cancion c) {
-        canciones.add(c);
-    }
-
-    //auxiliar inciso b
-    public Cancion getCancionMasReproducida() {
-        Cancion cancionMasReproducida = null;
-        int max = 0;
-
-        for (Cancion c: canciones) {
-            if (c.getCantidadReproducciones() > max) {
-                max = c.getCantidadReproducciones();
-                cancionMasReproducida = c;
-            }
-        }
-
-        return cancionMasReproducida;
-    }
-
-    public void agregarCanciones(List<Cancion> cancionesNuevas) {
-        canciones.addAll(cancionesNuevas);
-    }
-
-    public void mostrarCanciones() {
-        for (Cancion c: canciones) {
-            System.out.println(c.getTitulo());
-        }
     }
 }
