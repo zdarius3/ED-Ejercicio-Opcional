@@ -42,4 +42,8 @@ public class Album implements NivelJerarquia {
     public void setCantidadCanciones(int cantidadCanciones) {
         this.cantidadCanciones = cantidadCanciones;
     }
+
+    public void aumentarCantidadCanciones(int cantidad) {
+        cantidadCanciones += cantidad;
+    }
 }

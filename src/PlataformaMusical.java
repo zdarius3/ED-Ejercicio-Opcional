@@ -189,13 +189,27 @@ public class PlataformaMusical implements NivelJerarquia {
 
     //inciso d: método que permite agregar nuevas canciones y actualizar un álbum específico
     public boolean agregarCanciones(/*String nombreArtista,*/ String tituloAlbum, ArrayList<Cancion> canciones){
-        boolean agregadas = false;
+        boolean agregadas = true;
         BinaryTreeNode<NivelJerarquia> nodoAlbum = buscarAlbumPorTitulo(tituloAlbum);
+        ArrayList<BinaryTreeNode<NivelJerarquia>> cancionesAgregadas = new ArrayList<>();
 
         if (nodoAlbum != null) {
-            for (Cancion c: canciones) {
-                BinaryTreeNode<NivelJerarquia> nodoCancion = new BinaryTreeNode<>(c);
+            for (int i = 0; i < canciones.size() && agregadas; i++) {
+                BinaryTreeNode<NivelJerarquia> nodoCancion = new BinaryTreeNode<>(canciones.get(i));
+                cancionesAgregadas.add(nodoCancion);
                 agregadas = arbol.insertNode(nodoCancion, nodoAlbum);
+            }
+        }
+
+        if (agregadas) {
+            ((Album)
+            nodoAlbum.getInfo())
+                .aumentarCantidadCanciones(canciones.size());
+        }
+        else {
+            // eliminar canciones que se llegaron a agregar si no se agregan todas
+            for (BinaryTreeNode<NivelJerarquia> c: cancionesAgregadas) {
+                arbol.deleteNode(c);
             }
         }
         
