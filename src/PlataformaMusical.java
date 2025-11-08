@@ -1,6 +1,7 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import cu.edu.cujae.ceis.tree.TreeNode;
 import cu.edu.cujae.ceis.tree.binary.BinaryTreeNode;
@@ -236,9 +237,10 @@ public class PlataformaMusical implements NivelJerarquia {
         return albumEncontrado;
     }
 
-    //inciso e: método que permiten obtener una lista de reproducción dado el nombre de diferentes artistas y la cantidad de canciones de cada artista a incluir
-    public ArrayDeque<Cancion> obtenerListaDeReproduccion(List<PedidoListaDeReproduccion> pedidos) {
-        ArrayDeque<Cancion> lista = new ArrayDeque<>();
+    //inciso e: método que permiten obtener una lista de reproducción dado el nombre de diferentes artistas 
+    //y la cantidad de canciones de cada artista a incluir
+    public Queue<Cancion> obtenerListaDeReproduccion(List<PedidoListaDeReproduccion> pedidos) {
+        Queue<Cancion> lista = new ArrayDeque<>();
 
         for (PedidoListaDeReproduccion p: pedidos) {
             BinaryTreeNode<NivelJerarquia> nodoArtista = buscarArtistaPorNombre(p.getNombreArtista());
@@ -252,7 +254,8 @@ public class PlataformaMusical implements NivelJerarquia {
                     List<BinaryTreeNode<NivelJerarquia>> cancionesAlbum = arbol.getSons(albumes.get(i));
 
                     while (j < cancionesAlbum.size() && cancionesAnnadidas < p.getCantidadCanciones()) {
-                        lista.offerLast((Cancion)cancionesAlbum.get(j).getInfo());
+                        lista.offer((Cancion)
+                                    cancionesAlbum.get(j).getInfo());
                         cancionesAnnadidas++;
                         j++;
                     }

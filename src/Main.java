@@ -1,5 +1,5 @@
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -107,9 +107,9 @@ public class Main {
 
         System.out.println("Obteniendo lista de reproducción con 1 canción de Artista 1, "
                         + "5 de Artista7, y 1 de Artista6");
-        ArrayDeque<Cancion> lista = plataforma.obtenerListaDeReproduccion(pedidos);
+        Queue<Cancion> lista = plataforma.obtenerListaDeReproduccion(pedidos);
         while (!lista.isEmpty()) {
-            Cancion actual = lista.pollFirst();
+            Cancion actual = lista.poll();
             System.out.println("- " + actual.getTitulo());
         }
     }
