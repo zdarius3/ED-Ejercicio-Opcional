@@ -6,6 +6,7 @@ import java.util.Queue;
 import cu.edu.cujae.ceis.tree.TreeNode;
 import cu.edu.cujae.ceis.tree.binary.BinaryTreeNode;
 import cu.edu.cujae.ceis.tree.general.GeneralTree;
+import cu.edu.cujae.ceis.tree.iterators.general.InBreadthIterator;
 import cu.edu.cujae.ceis.tree.iterators.general.InDepthIterator;
 
 public class PlataformaMusical implements NivelJerarquia {
@@ -170,18 +171,28 @@ public class PlataformaMusical implements NivelJerarquia {
 
     private BinaryTreeNode<NivelJerarquia> buscarSelloPorNombre(String nombre) {
         BinaryTreeNode<NivelJerarquia> selloEncontrado = null;
-        InDepthIterator<NivelJerarquia> it = arbol.inDepthIterator();
+        InBreadthIterator<NivelJerarquia> it = arbol.inBreadthIterator();
+        boolean seguirBuscando = true;
 
-        while(it.hasNext() && selloEncontrado == null) {
+        if (it.hasNext()) {
+            it.next(); //saltar la raíz e ir directo a los sellos
+        }
+
+        while(it.hasNext() && seguirBuscando) {
             BinaryTreeNode<NivelJerarquia> nodo = it.nextNode();
 
-            if (nodo.getInfo() instanceof SelloDiscografico) {
-                SelloDiscografico actual = (SelloDiscografico) nodo.getInfo();
+            if (nodo.getInfo() instanceof Artista) {
+                seguirBuscando = false;
+            }
+            else {
+                if (nodo.getInfo() instanceof SelloDiscografico) {
+                    SelloDiscografico actual = (SelloDiscografico) nodo.getInfo();
 
-                if (actual.getNombre().equals(nombre)) {
-                    selloEncontrado = nodo;
+                    if (actual.getNombre().equals(nombre)) {
+                        selloEncontrado = nodo;
+                        seguirBuscando = false;
+                    }
                 }
-
             }
         }
 
